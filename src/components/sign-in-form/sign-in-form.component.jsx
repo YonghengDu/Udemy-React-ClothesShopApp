@@ -1,5 +1,5 @@
 import { async } from "@firebase/util";
-import { useState } from "react";
+import { useState,useContext } from "react";
 import { useEffect } from "react";
 import { getRedirectResult } from "firebase/auth";
 import {
@@ -11,6 +11,8 @@ import FormInput from "../form-input/form-input.component";
 import "./sign-in-form.style.scss";
 import Button from "../button/button.component";
 
+import { UserContext } from "../contexts/user.context";
+
 const defaultFormFileds = {
   displayName: "",
   email: "",
@@ -21,6 +23,9 @@ const defaultFormFileds = {
 const SignInForm = () => {
   const [formFileds, setFormFileds] = useState(defaultFormFileds);
   const { email, password } = formFileds;
+  
+  //有了观察者之后，只要auth变化就会重新渲染，搜易不再需要
+  const { setCurrentUser } = useContext(UserContext);
 
   const resetFormFiled = () => {
     setFormFileds(defaultFormFileds);
@@ -40,13 +45,14 @@ const SignInForm = () => {
 
   //方式二：GooglePopup登录
   const signInWithGoogle = async () => {
-    console.log("step1");
     //这个respon包含了通过google登录的用户的信息
     const { user } = await signInWithGooglePopup();
-    console.log("step2");
     // const response = await signInWithGooglePopup()
     // const { user } = response
-    await createUserDocumentFromAuth(user);
+
+
+    // setCurrentUser(user);有了观察者之后，只要auth变化就会重新渲染，所以不再需要
+    // await createUserDocumentFromAuth(user);
   };
 
   //方式三：邮件登录
@@ -55,8 +61,10 @@ const SignInForm = () => {
     event.preventDefault();
 
     try {
-      const response = await signInAuthUserWithEmailAndPassword(email,password);
-      console.log(response);
+      //获取到数据后通过useContext上传
+      const {user} = await signInAuthUserWithEmailAndPassword(email,password);
+      // console.log(response);
+      // setCurrentUser(user);有了观察者之后，只要auth变化就会重新渲染，搜易不再需要
     } catch (err) {
       switch(err.code){
         case 'auth/wrong-password':alert('wrong password');break;

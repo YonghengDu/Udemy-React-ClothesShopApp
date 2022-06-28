@@ -10,7 +10,9 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
 } from "firebase/auth";
 
 //下面是操作数据库的一些方法，所有的服务端数据都保存在firestore中
@@ -99,3 +101,10 @@ export const signInAuthUserWithEmailAndPassword = (email,password) => {
 
   return signInWithEmailAndPassword(auth,email,password);
 }
+
+//登出方法
+export const signOutUser = () => signOut(auth);
+
+
+//观察者，每当auth改变时就会调用callback
+export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth,callback);

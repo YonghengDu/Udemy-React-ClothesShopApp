@@ -1,5 +1,5 @@
 import { async } from "@firebase/util";
-import { useState } from "react";
+import { useState,useContext } from "react";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
@@ -7,6 +7,8 @@ import {
 import FormInput from "../form-input/form-input.component"
 import "./sign-up-form.style.scss"
 import Button from "../button/button.component";
+import { UserContext } from "../contexts/user.context";
+
 
 const defaultFormFileds = {
   displayName: "",
@@ -18,6 +20,8 @@ const defaultFormFileds = {
 const SignUpForm = () => {
   const [formFileds, setFormFileds] = useState(defaultFormFileds);
   const { displayName, email, password, confirmPassword } = formFileds;
+
+  const { setCurrentUser } = useContext(UserContext);
 
   const resetFormFiled = () => {
     setFormFileds(defaultFormFileds);
@@ -36,8 +40,11 @@ const SignUpForm = () => {
         email,
         password
       );
+    // setCurrentUser(user);有了观察者之后，只要auth变化就会重新渲染，搜易不再需要
+
       createUserDocumentFromAuth(user, { displayName });
       resetFormFiled();
+      
     } catch (err) {
       if (err.code === "auth/email-already-in-use") {
         alert("account is already exist");
