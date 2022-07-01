@@ -21,7 +21,12 @@ import {
   doc,
   getDoc,
   setDoc,
-  Firestore,
+  //上传数据库方法
+  collection,
+  writeBatch,
+  //从数据库获取方法
+  query,
+  getDocs
 } from "firebase/firestore";
 
 // Your web app's Firebase configuration
@@ -108,3 +113,33 @@ export const signOutUser = () => signOut(auth);
 
 //观察者，每当auth改变时就会调用callback
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth,callback);
+
+//向文档中添加本地json数据
+export const addCollectionAndDocuments = async (collectionKey,objectsToAdd,filed) => {
+  //参数filed表示json数据中的具体项，可以是title等等
+  const collectionRef = collection(db,collectionKey);
+  //
+  const batch = writeBatch(db);
+
+  objectsToAdd.forEach(obj => {
+    const docRef = doc(collectionRef,obj.title.toLowerCase());
+    batch.set(docRef,obj);
+  });
+
+  await batch.commit();
+  console.log("done");
+}
+
+//从db获取json数据用来渲染服务端
+export const getCategoriesAndDocuments = async () => {
+  const collectionRef = collection(db,'categories');
+  const q = query(collectionRef);
+
+  const querySnapshot = await getDocs(q);
+  const categoryMap =  querySnapshot.docs.reduce( (acc,docSnapshot) => {
+    const { title,items } = docSnapshot.data();
+    acc[title.toLowerCase()] = items;
+    return acc;
+  },{})
+  return categoryMap;
+}

@@ -1,20 +1,19 @@
-import { useContext,useState } from "react";
-import { ProductsContext } from "../../components/contexts/product.context";
-import ProductCard from "../../components/prooduct-card/prooduct-card.component";
-import "./shop.component.scss"
+import "./shop.component.scss";
+import CategoriesPreview from "../categories-preview.component/categories-preview.component";
+import { Routes,Route } from 'react-router-dom'
+import Category from "../category/category.component";
+
 const Shop = () => {
-  const { currentProducts,setCurrentProducts } = useContext(ProductsContext);
   return (
-    <div className="products-container">
-      {/**{currentProducts.map((item) => (
-        <h1 key={item.id}>{item.name}</h1>
-      ))}**/}
-      {
-        currentProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))
-      }
-    </div>
+    <Routes>
+      <Route index element={<CategoriesPreview />} />
+      {/* 
+        path=":param"
+        表示将路由地址param作为参数传递给element中的组件，参数名就是param
+        组件用useParams方法来接收param
+      */}
+      <Route path=":category" element={<Category />} />
+    </Routes>
   );
 };
 export default Shop;

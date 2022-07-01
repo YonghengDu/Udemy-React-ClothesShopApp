@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import Derectory from '../../components/derectory/derectory.compoent';
+import Directory from '../../components/directory/directory.compoent';
 
 const Home = () => {
   const categories = [
@@ -32,7 +32,7 @@ const Home = () => {
   return (
     <div>
       <Outlet />
-      <Derectory categories={categories}/>
+      <Directory categories={categories}/>
     </div>
   );
 };
