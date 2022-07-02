@@ -33,7 +33,7 @@ const Checkout = () => {
                     <br />
                 <span onClick={ () => addItemToCart(cartItem) }>increment</span>**/}
                 return (
-                    <CheckoutItem cartItem={cartItem}/>
+                    <CheckoutItem key={cartItem.id} cartItem={cartItem}/>
                 )
               } )
               :

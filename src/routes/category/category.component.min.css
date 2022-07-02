@@ -1,1 +1,1 @@
-.category-container{display:grid;grid-template-columns:repeat(4, 1fr);column-gap:20px;row-gap:50px}
+.category-container{display:grid;grid-template-columns:repeat(4, 1fr);column-gap:20px;row-gap:50px}.category-title{width:10%;margin:0 auto;font-size:39px;margin-bottom:25px}

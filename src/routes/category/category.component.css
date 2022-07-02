@@ -4,3 +4,10 @@
   column-gap: 20px;
   row-gap: 50px;
 }
+
+.category-title {
+  width: 10%;
+  margin: 0 auto;
+  font-size: 39px;
+  margin-bottom: 25px;
+}

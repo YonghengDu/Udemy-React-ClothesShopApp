@@ -9,6 +9,8 @@ import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component
 import { CartContext } from "../../components/contexts/cart.context";
 import "./navigation.styles.scss";
 
+// import { NavigationContainer } from "./navigation.styles";
+
 const Navigation = () => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
   // const signOutHandler = async () => {

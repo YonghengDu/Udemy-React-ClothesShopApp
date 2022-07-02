@@ -6,8 +6,8 @@ const CategoryPreview = ( {title,products} ) => {
     const goToDetailProducts = () => { navigate(`/shop/${title}`) }
     return (
         <div className="category-preview-container">
-          <h2 onClick={goToDetailProducts}>
-            <span className="title">{title.toUpperCase()}</span>
+          <h2>
+            <span className="title" onClick={goToDetailProducts}>{title.toUpperCase()}</span>
           </h2>
           <div className="preview">
             {
