@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from "react";
-import { addCollectionAndDocuments } from "../../utilities/fire-base/utility-firebase"
-import { getCategoriesAndDocuments } from "../../utilities/fire-base/utility-firebase"
+import { addCollectionAndDocuments } from "../utilities/fire-base/utility-firebase"
+import { getCategoriesAndDocuments } from "../utilities/fire-base/utility-firebase"
 
 //firebase服务端有了数据后不再需要这个
 // import SHOP_DATA from "../../shop-data.js"

@@ -67,11 +67,11 @@ export const db = getFirestore();
 export const createUserDocumentFromAuth = async (userAuth,additionalInfomation) => {
   //将google返回的用户uid记为数据库中用户文档的识别id
   const userDocRef = doc(db, "users", userAuth.uid);
-  console.log(userDocRef);
+  // console.log(userDocRef);
   //从doc中获取uid信息
   const userSnapshot = await getDoc(userDocRef);
-  console.log(userSnapshot);
-  console.log(userSnapshot.exists());
+  // console.log(userSnapshot);
+  // console.log(userSnapshot.exists());
 
   //如果uid存在，说明是有效文档
   if (!userSnapshot.exists()) {
