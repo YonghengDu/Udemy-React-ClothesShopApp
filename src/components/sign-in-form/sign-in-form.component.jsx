@@ -12,6 +12,8 @@ import "./sign-in-form.style.scss";
 import Button from "../button/button.component";
 
 import { UserContext } from "../../contexts/user.context";
+import { useSelector } from 'redux'
+
 
 const defaultFormFileds = {
   displayName: "",
@@ -24,7 +26,8 @@ const SignInForm = () => {
   const [formFileds, setFormFileds] = useState(defaultFormFileds);
   const { email, password } = formFileds;
   
-  //有了观察者之后，只要auth变化就会重新渲染，搜易不再需要
+  //有了观察者之后，只要auth变化就会重新渲染，所以不再需要
+  
   const { setCurrentUser } = useContext(UserContext);
 
   const resetFormFiled = () => {
@@ -59,12 +62,12 @@ const SignInForm = () => {
   const handleSubmit = async (event) => {
     //preventDefault()阻止事件关联的默认动作，这里阻止了默认提交
     event.preventDefault();
-
     try {
       //获取到数据后通过useContext上传
       const {user} = await signInAuthUserWithEmailAndPassword(email,password);
-      // console.log(response);
-      // setCurrentUser(user);有了观察者之后，只要auth变化就会重新渲染，搜易不再需要
+      console.log(user);
+      // 有了观察者之后，只要auth变化就会重新渲染，所以不再需要
+      // setCurrentUser(user);
     } catch (err) {
       switch(err.code){
         case 'auth/wrong-password':alert('wrong password');break;

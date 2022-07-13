@@ -2,10 +2,12 @@ import { useContext, useState, Fragment } from "react";
 import { CategoriesContext } from "../../contexts/categories.context";
 import CategoryPreview from "../../components/category-preview/category-preview.component";
 import "./categories-preview.component.scss";
-
+import { useSelector } from 'react-redux'
+import { selectCurrentCategories } from "../../store/categories/categories.selector";
 
 const CategoriesPreview = () => {
-  const { categoriesMap, setCategoriesMap } = useContext(CategoriesContext);
+  const categoriesMap = useSelector(selectCurrentCategories);
+  // const { categoriesMap, setCategoriesMap } = useContext(CategoriesContext);
   return (
     <div className="category-preview-container">
         {/**{currentProducts.map((item) => (

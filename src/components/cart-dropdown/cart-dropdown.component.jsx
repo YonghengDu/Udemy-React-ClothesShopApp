@@ -4,9 +4,13 @@ import CartItem from "../cart-item/cart-item.component"
 import { CartContext } from "../../contexts/cart.context"
 import { useContext } from "react"
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from "react-redux"
+import { selectCartItems, selectTotalPrice } from "../../store/cart/cart.selector"
 
 const CartDropdown = () => {
-    const { cartItems,totalPrice } = useContext(CartContext);
+    const cartItems = useSelector(selectCartItems)
+    const totalPrice = useSelector(selectTotalPrice)
+    // const { cartItems,totalPrice } = useContext(CartContext);
     const navigate = useNavigate();
     const goToCheckout = () => { navigate('/checkout') }
 

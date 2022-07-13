@@ -132,14 +132,20 @@ export const addCollectionAndDocuments = async (collectionKey,objectsToAdd,filed
 
 //从db获取json数据用来渲染服务端
 export const getCategoriesAndDocuments = async () => {
+  // 获取firestore database中的categories
   const collectionRef = collection(db,'categories');
   const q = query(collectionRef);
 
   const querySnapshot = await getDocs(q);
-  const categoryMap =  querySnapshot.docs.reduce( (acc,docSnapshot) => {
-    const { title,items } = docSnapshot.data();
-    acc[title.toLowerCase()] = items;
-    return acc;
-  },{})
-  return categoryMap;
+
+  const categoriesArr = querySnapshot.docs.map(docSnapshot => docSnapshot.data());
+
+  return categoriesArr;
+  // const categoryMap =  querySnapshot.docs
+  // .reduce( (acc,docSnapshot) => {
+  //   const { title,items } = docSnapshot.data();
+  //   acc[title.toLowerCase()] = items;
+  //   return acc;
+  // },{})
+  // return categoryMap;
 }

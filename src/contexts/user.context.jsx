@@ -44,7 +44,7 @@ export const UserProvider = ( {children} ) => {
     // const { currentUser } = state
 
     //useReducer由state和dispatch两部分组成（dispatch对应action）
-    //和useState相比，state可以一次性存储所有state数据
+    //和useState相比，state可以一次性存储所有由userReducer传递来的state数据
     //dispatch可以通过{type:'string'}中的string来处理数据，类似setState
     const [ { currentUser } , dispatch ] = useReducer(userReducer,INITIAL_STATE);
     // console.log(`currentUser`);
@@ -56,18 +56,18 @@ export const UserProvider = ( {children} ) => {
 
     const value = {currentUser,setCurrentUser};
 
-    useEffect(() => {
-        //第一次渲染就会执行
-       const unsuscribe = onAuthStateChangedListener((user)=>{
-        if(user){
-            createUserDocumentFromAuth(user);
-        }
-        setCurrentUser(user);
-        // console.log(user);
-       });
-       //当UserProvider组件unmount时会执行return
-       return unsuscribe;
-    },[]);
+    // useEffect(() => {
+    //     //第一次渲染就会执行
+    //    const unsuscribe = onAuthStateChangedListener((user)=>{
+    //     if(user){
+    //         createUserDocumentFromAuth(user);
+    //     }
+    //     setCurrentUser(user);
+    //     // console.log(user);
+    //    });
+    //    //当UserProvider组件unmount时会执行return
+    //    return unsuscribe;
+    // },[]);
 
 
     return <UserContext.Provider value={value}>{children}</UserContext.Provider>

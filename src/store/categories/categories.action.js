@@ -1,0 +1,4 @@
+import { CATEGORIES_ACTION_TYPES } from "./categories.types";
+
+export const setCategoriesArr  = (categoryArr) =>
+({ type:CATEGORIES_ACTION_TYPES.SET_CATEGORIES,payload:categoryArr })
