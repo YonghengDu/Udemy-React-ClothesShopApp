@@ -6,7 +6,7 @@ const selectCategoryReducer = (state) => state.categories;
 
 /**
  * createSelector(param1,param2)
- * 该函数会将param1用类似memory函数的方式储存起来
+ * 该函数会将param1即reducer用类似memory函数的方式储存起来
  * 只有当新的param1和储存的param1不一致时，才会执行param2的函数
  * @param1:array类型  储存用于生成selector的数据，可以有多个，但每个都和param2的多个入参对应
  * @param2:函数       入参就是param1的数据
@@ -34,3 +34,9 @@ export const selectCurrentCategories = createSelector(
 //     return acc;
 //   }, {});
 // }
+
+export const selsectCategoriesIsLoading = createSelector(
+  [selectCategoryReducer],
+  (categoriesSlice) => categoriesSlice.isLoading
+
+)

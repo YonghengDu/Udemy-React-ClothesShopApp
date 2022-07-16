@@ -6,19 +6,13 @@ import Category from "../category/category.component";
 import { setCategoriesArr } from "../../store/categories/categories.action";
 import { useDispatch } from 'react-redux'
 import { getCategoriesAndDocuments } from "../../utilities/fire-base/utility-firebase";
-
+import { fetchCategotiesAsync } from "../../store/categories/categories.action";
 
 const Shop = () => {
   const dispatch = useDispatch();
   // 组件向categoriesReducer发dispatch,将从firebase获取到的商品map存到categoriesReducer中
   useEffect(() => {
-    const getCategoriesArr = async () => {
-      const categoryArray = await getCategoriesAndDocuments();
-      //categoryMap就是数据库中商品SHOP_DATA
-      dispatch(setCategoriesArr(categoryArray));
-      // console.log(categoryArray);
-    };
-    getCategoriesArr();
+    dispatch(fetchCategotiesAsync());
   }, []);
 
   return (
